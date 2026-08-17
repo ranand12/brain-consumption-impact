@@ -761,6 +761,27 @@
     white-space: nowrap;
   }
 
+  .mechanism-illustration {
+    width: 100%;
+    margin: 28px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .mechanism-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .mechanism-illustration figcaption {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 10px 16px;
+    background: var(--surface-1);
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
   footer {
     max-width: 860px;
     margin: 0 auto;
@@ -839,6 +860,11 @@
     <p>Zald et al. (2004) used PET imaging to measure dopamine release in the striatum. Rewards delivered on a <strong>variable ratio</strong> sequence produced significant dopamine release in the striatum. The same rewards delivered on a fixed, predictable schedule? <strong>No significant dopamine release detected.</strong> The unpredictability itself is what fires the dopamine system.</p>
   </div>
 
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_01_variable_ratio.png" alt="Whiteboard diagram showing variable ratio reinforcement: predictable rewards produce no significant dopamine release, while unpredictable rewards trigger a significant dopamine surge in the nucleus accumbens — the same mechanism used by slot machines and social media feeds" loading="lazy">
+    <figcaption>Variable ratio reinforcement produces far greater dopamine release than predictable rewards — the same mechanism drives slot machines and social media feeds (Zald et al., 2004)</figcaption>
+  </figure>
+
   <p>This isn't a metaphor. Platform engineers deliberately build these mechanics. Tristan Harris, former Google design ethicist, has called it "persuasive technology" &mdash; the systematic application of behavioral psychology to product design.</p>
 
   <div class="cycle-diagram">
@@ -880,6 +906,11 @@
     <p>Robinson and Berridge's incentive salience theory describes how repeated exposure to rewarding stimuli increases the brain's drive to <strong>want</strong> without a corresponding increase in <strong>liking</strong>. Over time, you want more but enjoy less. This is the neurological signature of compulsion, and it precisely describes the experience of someone who has been scrolling for an hour and feels worse, not better.</p>
   </div>
 
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_02_wanting_vs_liking.png" alt="Whiteboard diagram showing the wanting versus liking distinction in the dopamine system: dopamine fires before the reward during anticipation (wanting), not during the reward itself (liking)" loading="lazy">
+    <figcaption>Berridge's discovery: dopamine drives wanting (anticipation), not liking (pleasure). The spike comes before the reward, creating a cycle of chasing a feeling you never quite reach.</figcaption>
+  </figure>
+
   <p>The mesolimbic dopamine pathway &mdash; running from the ventral tegmental area (VTA) through the nucleus accumbens to the prefrontal cortex &mdash; is the circuit being exploited. This is the same pathway activated by gambling, cocaine, and alcohol. The mechanism is identical; only the stimulus differs.</p>
   <p>Critically, the reward loops fire with high efficiency, but the <strong>satisfaction system</strong> &mdash; the quieter interplay of serotonin, oxytocin, and endorphins that produces genuine contentment &mdash; barely activates. Short-form content feeds the wanting circuit while starving the fulfillment circuit.</p>
 </div>
@@ -912,6 +943,11 @@
       </div>
     </div>
   </div>
+
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_03_d2_downregulation.png" alt="Whiteboard diagram showing D2 receptor downregulation: healthy brain synapse with many D2 receptors at 100% density versus addicted brain synapse with fewer receptors at approximately 80% density" loading="lazy">
+    <figcaption>D2 receptor downregulation at the synapse: the brain physically reduces its own reward receptors in response to chronic overstimulation — PET scan confirmed (Kim et al., 2011)</figcaption>
+  </figure>
 
   <p>What does reduced D2 receptor availability actually mean? In plain terms: your brain turns down the volume on its own reward receptors. You need <strong>more stimulation to feel the same level of satisfaction</strong>. This is the clinical definition of tolerance, and it is the same mechanism observed in cocaine and alcohol addiction.</p>
   <p>Nora Volkow's work at PNAS established that in addicted subjects, drug-induced dopamine increases are "markedly blunted compared with controls." The same dampening occurs with digital stimulation. The shift from enjoyment to compulsion &mdash; diminishing pleasure paired with increasing compulsion &mdash; has a precise name: <strong>dopamine tolerance</strong>.</p>
@@ -966,6 +1002,11 @@
       <div class="region-impact">D2 receptor downregulation measured via PET. The striatum's role in habit formation means these changes make the compulsive behavior self-reinforcing.</div>
     </div>
   </div>
+
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_04_gray_matter_loss.png" alt="Whiteboard diagram showing top-down brain view with six regions of gray matter loss highlighted: ACC, dlPFC, mOFC in red (high impact), and insular cortex, lateral PFC, striatum in orange (medium impact)" loading="lazy">
+    <figcaption>Structural brain changes documented across neuroimaging studies: the regions responsible for impulse control, planning, and decision-making are physically shrinking in heavy digital consumers.</figcaption>
+  </figure>
 
   <p>A 2026 meta-analysis in Molecular Psychiatry synthesized VBM data across digital addiction studies and found statistically convergent gray matter reductions in the bilateral ACC, left middle frontal gyrus, and left medial orbitofrontal cortex. These are the same regions implicated in substance addiction.</p>
 
@@ -1035,6 +1076,11 @@
     </div>
   </div>
 
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_05_fragmented_attention.png" alt="Whiteboard diagram showing how short-form content fragments attention: mPFC overactivated while dlPFC and vlPFC decrease, with comparison of sustained versus fragmented attention timelines" loading="lazy">
+    <figcaption>Brain imaging reveals the attention trade-off: the medial PFC works harder to compensate while working memory and inhibition circuits weaken from fragmented input patterns.</figcaption>
+  </figure>
+
   <h3>The Neuroscience of Fragmented Attention</h3>
   <p>A 2025 study published in <em>Scientific Reports</em> (Nature) used functional near-infrared spectroscopy (fNIRS) to measure brain activity in college students before and after social media use. The findings were specific:</p>
   <ul style="color: var(--text-secondary); margin: 12px 0 16px 20px; font-size: 16px; line-height: 1.7;">
@@ -1067,6 +1113,11 @@
     <p>"The digital age is effectively reshaping the reading circuits in our brains." When the brain adapts to processing information in rapid, shallow bursts, the contemplative dimension &mdash; the capacity to pause, reflect, and form insight &mdash; atrophies. Not because you forgot how to read, but because the neural circuit that enables deep reading is being overwritten by one optimized for scanning and skimming.</p>
   </div>
 
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_06_deep_reading_circuit.png" alt="Whiteboard diagram showing the deep reading circuit connecting visual cortex, angular gyrus, Wernicke's area, Broca's area, and prefrontal cortex — active when reading deeply, atrophying when replaced by scanning and skimming" loading="lazy">
+    <figcaption>Maryanne Wolf's deep reading circuit: a fragile neural network built through practice that enables empathy, critical thinking, and reflection — now atrophying as digital scanning pathways take over.</figcaption>
+  </figure>
+
   <p>Wolf describes this as a "hinge moment" in human cognitive history. If the deep reading circuit atrophies across a generation, we lose the neurological substrate for empathy, perspective-taking, and resistance to demagoguery. Her proposed solution: <strong>biliteracy</strong> &mdash; build the deep reading circuit through physical books first, then introduce digital media. The order matters because neural circuits, once established, are more resilient.</p>
 </div>
 
@@ -1077,6 +1128,11 @@
   <p>The Default Mode Network (DMN) is a large-scale brain network &mdash; medial prefrontal cortex, posterior cingulate cortex, precuneus, angular gyrus &mdash; that activates when you are <strong>not focused on the external world</strong>. It's the brain at wakeful rest: daydreaming, self-reflection, remembering the past, planning the future.</p>
   <p>The DMN is not idle time. It is where the brain does its most important integrative work: constructing a coherent sense of self, consolidating memories, generating creative connections, and building the internal narrative that makes you <em>you</em>.</p>
   <p>Short-form content consumption fills every moment of potential DMN activation. Waiting in line? Scroll. Sitting on the train? Scroll. Lying in bed before sleep? Scroll. The brain never enters the rest state that allows this network to function.</p>
+
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_07_default_mode_network.png" alt="Whiteboard diagram showing the Default Mode Network with four key regions (mPFC, PCC, precuneus, angular gyrus) in two states: active during rest and self-reflection versus suppressed during constant scrolling" loading="lazy">
+    <figcaption>The Default Mode Network: active during rest, daydreaming, and self-reflection — suppressed when every idle moment is filled with scrolling. This network does the brain's most important integrative work.</figcaption>
+  </figure>
 
   <h3>DMN and Reading Comprehension</h3>
   <p>Research published in <em>eLife</em> revealed a paradox: the DMN is active during both mind-wandering <em>and</em> deep reading comprehension. In focused readers with good comprehension, the primary visual cortex showed strong functional coupling to DMN regions that support reading. In those who mind-wandered, this coupling weakened. The DMN, properly engaged, is part of the deep reading circuit. Disrupted, it becomes the mechanism of distraction.</p>
@@ -1142,6 +1198,11 @@
     </tbody>
   </table>
 
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_08_addiction_comparison.png" alt="Whiteboard diagram comparing substance addiction and digital addiction: both activate the same VTA to nucleus accumbens to PFC reward circuit, with identical D2 receptor reduction and gray matter changes" loading="lazy">
+    <figcaption>Same brain circuit, different stimulus: neuroimaging confirms that substance and digital addiction activate identical reward pathways and produce the same structural changes.</figcaption>
+  </figure>
+
   <p>The neurological parallel is not metaphorical. Neuroimaging confirms that the same brain circuits, same neurotransmitter systems, and same structural changes observed in substance addiction are present in heavy digital media consumption. The key difference: substance addiction is recognized by psychiatric frameworks. Behavioral digital addiction is not &mdash; yet.</p>
 
   <div class="callout">
@@ -1166,6 +1227,11 @@
 
   <p>Hart identified the central paradox years before the short-form video era made it universal: <strong>anhedonia</strong> &mdash; the inability to experience pleasure &mdash; is not caused by too little stimulation. It is caused by too much.</p>
   <p>Previously, anhedonia was linked only to severe psychiatric disorders: major depression, schizophrenia, chronic pain states. Hart showed that a subtler, more insidious form was spreading through otherwise healthy populations. Not the clinical inability to feel anything &mdash; but a steady, creeping decline in the ability to find joy in small events and simple experiences, while being driven toward ever-increasing levels of stimulation just to feel <em>something</em>.</p>
+
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_09_anhedonia_threshold.png" alt="Whiteboard diagram showing Hart's rising pleasure threshold: healthy brain where many everyday experiences bring joy, moderate use where the threshold rises and some pleasures fall short, and heavy use where almost nothing registers" loading="lazy">
+    <figcaption>Hart's anhedonia model: dopamine flooding raises the barrier that enjoyment must cross. In heavy users, everyday pleasures — a sunset, a conversation, a meal — no longer clear the bar.</figcaption>
+  </figure>
 
   <h3>Hart's Threshold Model</h3>
   <p>Hart illustrated the mechanism with a simple but devastating diagram: dopamine flooding from overstimulation <strong>raises the threshold barrier</strong> that enjoyment must cross to reach the brain's pleasure center. Small pleasures &mdash; a sunset, a conversation, a meal &mdash; no longer clear the bar. Only extreme stimulation registers.</p>
@@ -1251,6 +1317,11 @@
     <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 8px;">Every dopamine spike is followed by an equal and opposite dip. Chronic overstimulation tilts the resting point toward pain.</div>
   </div>
 
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_10_pleasure_pain_seesaw.png" alt="Whiteboard diagram showing Lembke's pleasure-pain seesaw in three states: initial use tilted toward pleasure, compensatory dip tilted toward pain, and chronic use where the baseline permanently shifts toward pain" loading="lazy">
+    <figcaption>Lembke's opponent-process model: the brain's pleasure-pain balance tips toward pleasure with each scroll, but the compensatory rebound pushes toward pain. Chronic use shifts the resting point below neutral.</figcaption>
+  </figure>
+
   <p>Here is the devastating implication: every dopamine spike is followed by an equal and opposite dip below baseline. That dip is the moment of restlessness, boredom, or anxiety you feel when you put your phone down. It's the micro-withdrawal that makes you pick it back up. And with chronic overstimulation, the resting point of the balance shifts. Your <strong>baseline mood settles below neutral</strong>.</p>
 
   <div class="callout insight">
@@ -1279,6 +1350,11 @@
 
   <p>Carr's argument fills the gap between the dopamine research and the structural brain changes: <strong>neuroplasticity</strong>. The brain is not static. It physically restructures itself based on how you use it. Every hour you spend in one mode of thinking strengthens the neural pathways for that mode and weakens the pathways you aren't using.</p>
   <p>This is not metaphor. Brain scientists have demonstrated that even <strong>five hours of internet use</strong> can cause the formation of new neural pathways in non-internet users. The brain literally rewires for the medium it's exposed to.</p>
+
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_11_neuroplasticity.png" alt="Whiteboard diagram showing neuroplasticity as a double-edged sword: deep thinking pathways strengthened by reading and focus versus shallow processing pathways strengthened by scrolling and multitasking" loading="lazy">
+    <figcaption>Carr's central thesis: neuroplasticity rewires the brain for whatever you practice. Deep thinking pathways atrophy as shallow processing pathways strengthen — the brain optimizes for what it does most.</figcaption>
+  </figure>
 
   <h3>What Gets Stronger vs. What Gets Weaker</h3>
   <table class="comparison-table">
@@ -1327,6 +1403,11 @@
   <div class="section-number">Mechanism 12</div>
   <h2>Brain Fog and Slow Recall &mdash; What's Actually Happening</h2>
   <p>You know the word. You've used it a hundred times. It's right there &mdash; but it won't come. Ten minutes later, in the shower, it surfaces effortlessly. This isn't random. It's a specific neurological pattern, and digital overconsumption is making it worse.</p>
+
+  <figure class="mechanism-illustration">
+    <img src="images/mechanism_12_brain_fog_retrieval.png" alt="Whiteboard diagram showing healthy versus impaired memory retrieval: normal PFC-hippocampus pathway produces fast retrieval, while degraded pathway with cognitive residue and D2 dysregulation leads to tip-of-tongue failures" loading="lazy">
+    <figcaption>Brain fog is a retrieval problem, not a storage problem. The memory exists — but PFC degradation, cognitive residue, and dopamine dysregulation congest the highway to it.</figcaption>
+  </figure>
 
   <h3>The Retrieval Problem (Not a Storage Problem)</h3>
   <p>The critical distinction: <strong>the memory exists</strong>. It is encoded and stored. The problem is <em>retrieval</em> &mdash; the brain's ability to access the memory on demand. This is governed by different neural circuits than storage, and those circuits are precisely the ones degraded by chronic digital consumption.</p>
