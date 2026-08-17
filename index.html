@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Consumed Mind — What Short-Form Content Does to Your Brain</title>
+<style>
+  :root {
+    --surface-1: #fcfcfb;
+    --surface-page: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --gridline: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+
+    --cat-1: #2a78d6;
+    --cat-2: #eb6834;
+    --cat-3: #1baf7a;
+    --cat-4: #eda100;
+    --cat-5: #e87ba4;
+    --cat-6: #008300;
+    --cat-7: #4a3aa7;
+    --cat-8: #e34948;
+
+    --status-good: #0ca30c;
+    --status-warning: #fab219;
+    --status-serious: #ec835a;
+    --status-critical: #d03b3b;
+
+    --seq-100: #cde2fb;
+    --seq-250: #86b6ef;
+    --seq-400: #3987e5;
+    --seq-550: #1c5cab;
+    --seq-700: #0d366b;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      --surface-1: #1a1a19;
+      --surface-page: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #898781;
+      --gridline: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+
+      --cat-1: #3987e5;
+      --cat-2: #d95926;
+      --cat-3: #199e70;
+      --cat-4: #c98500;
+      --cat-5: #d55181;
+      --cat-6: #008300;
+      --cat-7: #9085e9;
+      --cat-8: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    --surface-1: #1a1a19;
+    --surface-page: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255,255,255,0.10);
+
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+    --cat-4: #c98500;
+    --cat-5: #d55181;
+    --cat-6: #008300;
+    --cat-7: #9085e9;
+    --cat-8: #e66767;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--surface-page);
+    color: var(--text-primary);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 100;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+  .theme-toggle:hover { background: var(--gridline); }
+
+  header {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 24px 48px;
+  }
+  header .kicker {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--cat-8);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  header .subtitle {
+    font-size: 19px;
+    color: var(--text-secondary);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  .hero-stat-row {
+    max-width: 860px;
+    margin: 0 auto 56px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .stat-tile {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .stat-tile .stat-value {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .stat-tile .stat-delta {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .stat-tile .stat-delta.down { color: var(--status-critical); }
+  .stat-tile .stat-delta.up { color: var(--status-critical); }
+  .stat-tile .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .section {
+    margin-bottom: 64px;
+  }
+
+  .section-number {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--cat-1);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  .callout {
+    background: var(--surface-1);
+    border-left: 3px solid var(--cat-1);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .callout.warn { border-left-color: var(--status-critical); }
+  .callout.insight { border-left-color: var(--cat-3); }
+  .callout p { margin-bottom: 0; }
+  .callout .callout-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .chart-container {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin: 28px 0;
+  }
+  .chart-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .chart-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-label {
+    width: 140px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 28px;
+    background: var(--gridline);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+  }
+  .bar-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-left: 8px;
+    white-space: nowrap;
+    min-width: 36px;
+  }
+
+  .timeline-chart {
+    position: relative;
+    height: 240px;
+    margin-top: 12px;
+  }
+  .timeline-axis {
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    right: 0;
+    height: 1px;
+    background: var(--baseline);
+  }
+  .timeline-y-axis {
+    position: absolute;
+    left: 60px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--baseline);
+  }
+  .timeline-grid-line {
+    position: absolute;
+    left: 60px;
+    right: 0;
+    height: 1px;
+    background: var(--gridline);
+  }
+  .timeline-y-label {
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    transform: translateY(-50%);
+    width: 52px;
+    text-align: right;
+  }
+  .timeline-x-label {
+    position: absolute;
+    bottom: -22px;
+    font-size: 12px;
+    color: var(--text-muted);
+    transform: translateX(-50%);
+  }
+  .timeline-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cat-1);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    cursor: default;
+  }
+  .timeline-dot .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: var(--surface-1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .timeline-dot:hover .tooltip { display: block; }
+  .timeline-line {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .brain-map {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) {
+    .brain-map { grid-template-columns: 1fr; }
+    .bar-label { width: 100px; font-size: 12px; }
+  }
+  .brain-region {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .brain-region:hover { border-color: var(--cat-1); }
+  .brain-region .region-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .brain-region .region-role {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .brain-region .region-impact {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .brain-region .impact-severity {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .brain-region .impact-severity.high {
+    background: #fde8e8;
+    color: var(--status-critical);
+  }
+  .brain-region .impact-severity.medium {
+    background: #fef3d0;
+    color: #96660a;
+  }
+  :root[data-theme="dark"] .brain-region .impact-severity.high {
+    background: #3d1515;
+  }
+  :root[data-theme="dark"] .brain-region .impact-severity.medium {
+    background: #3d2e0a;
+  }
+
+  .cycle-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 32px 0;
+    padding: 20px 0;
+  }
+  .cycle-step {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    text-align: center;
+    min-width: 140px;
+    max-width: 180px;
+  }
+  .cycle-step .step-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--cat-1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .cycle-step .step-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 4px 0;
+  }
+  .cycle-step .step-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .cycle-arrow {
+    font-size: 20px;
+    color: var(--text-muted);
+    padding: 0 8px;
+  }
+  @media (max-width: 700px) {
+    .cycle-diagram { flex-direction: column; gap: 0; }
+    .cycle-arrow { transform: rotate(90deg); padding: 4px 0; }
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .comparison-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--baseline);
+    font-weight: 600;
+  }
+  .comparison-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gridline);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table .feature-name { font-weight: 500; color: var(--text-primary); }
+
+  .source-list {
+    margin-top: 12px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .source-list li {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--gridline);
+    line-height: 1.5;
+  }
+  .source-list li:last-child { border-bottom: none; }
+  .source-list a {
+    color: var(--cat-1);
+    text-decoration: none;
+  }
+  .source-list a:hover { text-decoration: underline; }
+
+  .toc {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .toc-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .toc ol {
+    padding-left: 20px;
+    counter-reset: toc-counter;
+  }
+  .toc li {
+    padding: 4px 0;
+    font-size: 14px;
+  }
+  .toc a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--cat-1); }
+
+  .divider {
+    height: 1px;
+    background: var(--gridline);
+    margin: 48px 0;
+  }
+
+  .book-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 600px) {
+    .book-card { grid-template-columns: 1fr; }
+  }
+  .book-icon {
+    width: 56px;
+    height: 72px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .book-meta .book-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .book-meta .book-author {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .book-meta .book-thesis {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .seesaw {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+    margin: 32px auto;
+    max-width: 420px;
+    position: relative;
+  }
+  .seesaw-side {
+    flex: 1;
+    text-align: center;
+    padding: 16px 12px;
+    border-radius: 10px 10px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .seesaw-side.pleasure {
+    background: rgba(27,175,122,0.12);
+    color: var(--cat-3);
+  }
+  .seesaw-side.pain {
+    background: rgba(227,73,72,0.12);
+    color: var(--cat-8);
+  }
+  .seesaw-fulcrum {
+    width: 40px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding-bottom: 4px;
+    flex-shrink: 0;
+  }
+  .seesaw-bar {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    height: 4px;
+    background: var(--baseline);
+    border-radius: 2px;
+  }
+
+  .threshold-diagram {
+    margin: 28px 0;
+    padding: 20px 0;
+  }
+  .threshold-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .threshold-label {
+    width: 120px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .threshold-track {
+    flex: 1;
+    height: 32px;
+    background: var(--gridline);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .threshold-fill {
+    height: 100%;
+    border-radius: 6px;
+    position: relative;
+  }
+  .threshold-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--text-primary);
+    z-index: 2;
+  }
+  .threshold-line-label {
+    position: absolute;
+    top: -18px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: var(--text-primary);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">Light / Dark</button>
+
+<header>
+  <div class="kicker">Neuroscience Research Briefing</div>
+  <h1>The Consumed Mind</h1>
+  <p class="subtitle">What happens inside your brain when you scroll through short-form content &mdash; the neuroscience of dopamine hijacking, structural brain changes, attention erosion, and the quiet death of deep thought. This is not opinion. This is what the science says.</p>
+</header>
+
+<div class="hero-stat-row">
+  <div class="stat-tile">
+    <div class="stat-value">7.2s</div>
+    <div class="stat-delta down">&darr; 40% since 2000</div>
+    <div class="stat-label">Average human attention span in 2026 (was 12s)</div>
+  </div>
+  <div class="stat-tile">
+    <div class="stat-value">-12%</div>
+    <div class="stat-delta down">Gray matter loss</div>
+    <div class="stat-label">Reduction in gray matter density in attention-regulating regions among heavy screen users</div>
+  </div>
+  <div class="stat-tile">
+    <div class="stat-value">-18%</div>
+    <div class="stat-delta down">Prefrontal cortex</div>
+    <div class="stat-label">Decrease in prefrontal cortex activity from infinite-scroll dopamine loops</div>
+  </div>
+  <div class="stat-tile">
+    <div class="stat-value">-20%</div>
+    <div class="stat-delta down">D2 receptors</div>
+    <div class="stat-label">Reduction in dopamine D2 receptor availability in the striatum of addicted users</div>
+  </div>
+</div>
+
+<main>
+
+<nav class="toc">
+  <div class="toc-title">Contents</div>
+  <ol>
+    <li><a href="#mechanism">The Slot Machine in Your Pocket &mdash; Variable Ratio Reinforcement</a></li>
+    <li><a href="#dopamine">Dopamine Is Not the Pleasure Chemical &mdash; It's the Wanting Chemical</a></li>
+    <li><a href="#tolerance">Tolerance and D2 Receptor Downregulation &mdash; The Addiction Spiral</a></li>
+    <li><a href="#structural">Structural Brain Changes &mdash; Gray Matter Loss Under the Scanner</a></li>
+    <li><a href="#attention">The Fragmented Mind &mdash; Attention, Memory, and Executive Function</a></li>
+    <li><a href="#deep-reading">The Death of Deep Reading &mdash; Maryanne Wolf's Warning</a></li>
+    <li><a href="#dmn">Default Mode Network &mdash; Losing the Ability to Think About Nothing</a></li>
+    <li><a href="#comparison">How It Compares to Other Addictions</a></li>
+    <li><a href="#anhedonia">Thrilled to Death &mdash; The Anhedonia Epidemic</a></li>
+    <li><a href="#balance">The Pleasure-Pain Seesaw &mdash; Lembke's Dopamine Nation</a></li>
+    <li><a href="#shallows">The Shallows &mdash; Neuroplasticity Working Against You</a></li>
+    <li><a href="#sources">Sources and Key Studies</a></li>
+  </ol>
+</nav>
+
+<!-- ===== SECTION 1: MECHANISM ===== -->
+<div class="section" id="mechanism">
+  <div class="section-number">Mechanism 01</div>
+  <h2>The Slot Machine in Your Pocket</h2>
+  <p>Every time you open TikTok, Instagram Reels, or YouTube Shorts, you are engaging with a system that operates on exactly the same psychological principle as a slot machine: <strong>variable ratio reinforcement</strong>.</p>
+  <p>B.F. Skinner discovered in the 1950s that the most persistent behaviors are produced not by predictable rewards, but by unpredictable ones. When a rat presses a lever and sometimes gets food, sometimes doesn't &mdash; with no discernible pattern &mdash; it presses the lever obsessively, far more than if it got food every time. The uncertainty is the engine.</p>
+  <p>This is what your feed does. Sometimes you get a video that makes you laugh. Sometimes it's boring. Sometimes it's infuriating. Sometimes it's transcendent. You never know which one is next. And that uncertainty &mdash; that <em>maybe</em> &mdash; is what makes you keep swiping.</p>
+
+  <div class="callout">
+    <div class="callout-title">The PET scan evidence</div>
+    <p>Zald et al. (2004) used PET imaging to measure dopamine release in the striatum. Rewards delivered on a <strong>variable ratio</strong> sequence produced significant dopamine release in the striatum. The same rewards delivered on a fixed, predictable schedule? <strong>No significant dopamine release detected.</strong> The unpredictability itself is what fires the dopamine system.</p>
+  </div>
+
+  <p>This isn't a metaphor. Platform engineers deliberately build these mechanics. Tristan Harris, former Google design ethicist, has called it "persuasive technology" &mdash; the systematic application of behavioral psychology to product design.</p>
+
+  <div class="cycle-diagram">
+    <div class="cycle-step">
+      <div class="step-num">Step 1</div>
+      <div class="step-title">Cue</div>
+      <div class="step-desc">Notification, boredom, habit trigger</div>
+    </div>
+    <div class="cycle-arrow">&rarr;</div>
+    <div class="cycle-step">
+      <div class="step-num">Step 2</div>
+      <div class="step-title">Anticipation</div>
+      <div class="step-desc">Dopamine surges <em>before</em> reward</div>
+    </div>
+    <div class="cycle-arrow">&rarr;</div>
+    <div class="cycle-step">
+      <div class="step-num">Step 3</div>
+      <div class="step-title">Reward (brief)</div>
+      <div class="step-desc">Fleeting satisfaction, 15-60 seconds</div>
+    </div>
+    <div class="cycle-arrow">&rarr;</div>
+    <div class="cycle-step">
+      <div class="step-num">Step 4</div>
+      <div class="step-title">Recalibration</div>
+      <div class="step-desc">Brain resets, drives next swipe</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 2: DOPAMINE ===== -->
+<div class="section" id="dopamine">
+  <div class="section-number">Mechanism 02</div>
+  <h2>Dopamine Is Not the Pleasure Chemical &mdash; It's the Wanting Chemical</h2>
+  <p>The popular understanding of dopamine is wrong. Dopamine does not produce pleasure. Neuroscientist Kent Berridge's foundational research demonstrated that dopamine drives <strong>wanting</strong>, not <strong>liking</strong>. The spike comes <em>before</em> the reward, not during it.</p>
+  <p>This distinction is crucial for understanding what short-form content does to you. When you scroll, your brain isn't experiencing pleasure &mdash; it's experiencing <strong>anticipation</strong>. The satisfaction of each video is fleeting, measured in seconds. Within moments, the brain recalibrates and generates a new pulse of wanting. You are chasing a feeling you never quite reach.</p>
+
+  <div class="callout insight">
+    <div class="callout-title">Incentive salience theory</div>
+    <p>Robinson and Berridge's incentive salience theory describes how repeated exposure to rewarding stimuli increases the brain's drive to <strong>want</strong> without a corresponding increase in <strong>liking</strong>. Over time, you want more but enjoy less. This is the neurological signature of compulsion, and it precisely describes the experience of someone who has been scrolling for an hour and feels worse, not better.</p>
+  </div>
+
+  <p>The mesolimbic dopamine pathway &mdash; running from the ventral tegmental area (VTA) through the nucleus accumbens to the prefrontal cortex &mdash; is the circuit being exploited. This is the same pathway activated by gambling, cocaine, and alcohol. The mechanism is identical; only the stimulus differs.</p>
+  <p>Critically, the reward loops fire with high efficiency, but the <strong>satisfaction system</strong> &mdash; the quieter interplay of serotonin, oxytocin, and endorphins that produces genuine contentment &mdash; barely activates. Short-form content feeds the wanting circuit while starving the fulfillment circuit.</p>
+</div>
+
+<!-- ===== SECTION 3: TOLERANCE ===== -->
+<div class="section" id="tolerance">
+  <div class="section-number">Mechanism 03</div>
+  <h2>Tolerance and D2 Receptor Downregulation</h2>
+  <p>This is where the neuroscience moves from concerning to alarming. Repeated overstimulation of the dopamine system doesn't just create a habit &mdash; it physically changes the receptor landscape of your brain.</p>
+  <p>PET scan studies by Kim et al. (2011) directly measured dopamine receptor density in people with internet addiction using radioligand [&sup1;&sup1;C] raclopride. The result: <strong>significantly reduced D2 receptor availability</strong> in the dorsal striatum, including the bilateral dorsal caudate and right putamen.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Dopamine D2 Receptor Reduction in Digital Addiction</div>
+    <div class="chart-subtitle">Consistent ~20% reduction across PET imaging studies. Lower D2 = higher tolerance = more stimulation needed.</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <span class="bar-label">Healthy controls</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%; background: var(--cat-3);" data-width="100"></div></div>
+        <span class="bar-value">100%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Substance addiction</span>
+        <div class="bar-track"><div class="bar-fill" style="width:78%; background: var(--cat-2);" data-width="78"></div></div>
+        <span class="bar-value">~78%</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Internet addiction</span>
+        <div class="bar-track"><div class="bar-fill" style="width:80%; background: var(--cat-1);" data-width="80"></div></div>
+        <span class="bar-value">~80%</span>
+      </div>
+    </div>
+  </div>
+
+  <p>What does reduced D2 receptor availability actually mean? In plain terms: your brain turns down the volume on its own reward receptors. You need <strong>more stimulation to feel the same level of satisfaction</strong>. This is the clinical definition of tolerance, and it is the same mechanism observed in cocaine and alcohol addiction.</p>
+  <p>Nora Volkow's work at PNAS established that in addicted subjects, drug-induced dopamine increases are "markedly blunted compared with controls." The same dampening occurs with digital stimulation. The shift from enjoyment to compulsion &mdash; diminishing pleasure paired with increasing compulsion &mdash; has a precise name: <strong>dopamine tolerance</strong>.</p>
+
+  <div class="callout warn">
+    <div class="callout-title">The ventral-to-dorsal shift</div>
+    <p>Research shows a structural transition in the brain's engagement pattern. Early in addiction, the <strong>ventral striatum</strong> (associated with reward and motivation) drives the behavior. Over time, control shifts to the <strong>dorsal striatum</strong> (associated with habit and automaticity). The behavior transitions from goal-directed to habitual &mdash; you're no longer scrolling because you want to. You're scrolling because the circuit is wired to.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 4: STRUCTURAL ===== -->
+<div class="section" id="structural">
+  <div class="section-number">Mechanism 04</div>
+  <h2>Structural Brain Changes Under the Scanner</h2>
+  <p>Neuroimaging studies have moved beyond correlation. Voxel-based morphometry (VBM) meta-analyses now show <strong>consistent, replicable patterns</strong> of gray matter volume reduction in heavy digital consumers.</p>
+
+  <div class="brain-map">
+    <div class="brain-region">
+      <span class="impact-severity high">High Impact</span>
+      <div class="region-name">Anterior Cingulate Cortex (ACC)</div>
+      <div class="region-role">Impulse control, error detection, emotional regulation</div>
+      <div class="region-impact">Reduced gray matter in bilateral ACC. Loh & Kanai (2014) found reduced GM specifically in frequent media multitaskers. The ACC is the brain's "stop and think" circuit.</div>
+    </div>
+    <div class="brain-region">
+      <span class="impact-severity high">High Impact</span>
+      <div class="region-name">Dorsolateral Prefrontal Cortex (dlPFC)</div>
+      <div class="region-role">Working memory, planning, cognitive flexibility</div>
+      <div class="region-impact">Decreased activation during short-form video engagement. The dlPFC governs your ability to hold information, plan ahead, and resist impulses.</div>
+    </div>
+    <div class="brain-region">
+      <span class="impact-severity high">High Impact</span>
+      <div class="region-name">Medial Orbitofrontal Cortex (mOFC)</div>
+      <div class="region-role">Decision-making, reward evaluation</div>
+      <div class="region-impact">VBM meta-analysis (2026) found consistent GMV reductions in the left mOFC in digital addiction, impairing the ability to weigh long-term consequences against short-term rewards.</div>
+    </div>
+    <div class="brain-region">
+      <span class="impact-severity medium">Medium Impact</span>
+      <div class="region-name">Insular Cortex</div>
+      <div class="region-role">Self-awareness, interoception, craving</div>
+      <div class="region-impact">Reduced gray matter volume. The insula is involved in conscious awareness of bodily states and cravings &mdash; its impairment may explain why heavy users lose awareness of time passing.</div>
+    </div>
+    <div class="brain-region">
+      <span class="impact-severity medium">Medium Impact</span>
+      <div class="region-name">Lateral Prefrontal Cortex</div>
+      <div class="region-role">Cognitive control, executive function</div>
+      <div class="region-impact">Longitudinal data shows stronger reduction in cortical thickness over 3 years in high social media users. This is the region responsible for self-regulation.</div>
+    </div>
+    <div class="brain-region">
+      <span class="impact-severity medium">Medium Impact</span>
+      <div class="region-name">Striatum (Caudate & Putamen)</div>
+      <div class="region-role">Habit formation, reward processing</div>
+      <div class="region-impact">D2 receptor downregulation measured via PET. The striatum's role in habit formation means these changes make the compulsive behavior self-reinforcing.</div>
+    </div>
+  </div>
+
+  <p>A 2026 meta-analysis in Molecular Psychiatry synthesized VBM data across digital addiction studies and found statistically convergent gray matter reductions in the bilateral ACC, left middle frontal gyrus, and left medial orbitofrontal cortex. These are the same regions implicated in substance addiction.</p>
+
+  <div class="callout">
+    <div class="callout-title">What this means in plain language</div>
+    <p>The brain regions responsible for <strong>stopping yourself</strong>, <strong>thinking ahead</strong>, <strong>staying focused</strong>, and <strong>evaluating consequences</strong> are physically shrinking in heavy users. The regions responsible for <strong>habit</strong> and <strong>compulsion</strong> are becoming dominant. The brain is literally remodeling itself to favor reactive, stimulus-driven behavior over deliberate thought.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 5: ATTENTION ===== -->
+<div class="section" id="attention">
+  <div class="section-number">Mechanism 05</div>
+  <h2>The Fragmented Mind</h2>
+
+  <div class="chart-container">
+    <div class="chart-title">Average Human Attention Span</div>
+    <div class="chart-subtitle">Sustained attention on a single task, in seconds. Source: Microsoft Research, Global Attention Metrics (2026)</div>
+    <div class="timeline-chart" id="attention-chart">
+      <div class="timeline-y-axis"></div>
+      <div class="timeline-axis"></div>
+
+      <div class="timeline-grid-line" style="bottom: 25%;"></div>
+      <div class="timeline-grid-line" style="bottom: 50%;"></div>
+      <div class="timeline-grid-line" style="bottom: 75%;"></div>
+      <div class="timeline-grid-line" style="bottom: 100%;"></div>
+
+      <div class="timeline-y-label" style="bottom: 0;">0s</div>
+      <div class="timeline-y-label" style="bottom: 25%;">4s</div>
+      <div class="timeline-y-label" style="bottom: 50%;">8s</div>
+      <div class="timeline-y-label" style="bottom: 75%;">12s</div>
+      <div class="timeline-y-label" style="bottom: 100%;">16s</div>
+
+      <svg class="timeline-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polyline
+          points="8,25 40,48 72,49.5 88,52 96,55"
+          fill="none"
+          stroke="var(--cat-1)"
+          stroke-width="0.6"
+          vector-effect="non-scaling-stroke"
+          stroke-linejoin="round"
+        />
+      </svg>
+
+      <div class="timeline-dot" style="left: calc(60px + 8%); bottom: 75%;">
+        <div class="tooltip">2000: 12.0s</div>
+      </div>
+      <div class="timeline-dot" style="left: calc(60px + 40%); bottom: 52%;">
+        <div class="tooltip">2015: 8.25s</div>
+      </div>
+      <div class="timeline-dot" style="left: calc(60px + 72%); bottom: 50.5%;">
+        <div class="tooltip">2024: 8.25s</div>
+      </div>
+      <div class="timeline-dot" style="left: calc(60px + 88%); bottom: 48%;">
+        <div class="tooltip">2025: 7.97s</div>
+      </div>
+      <div class="timeline-dot" style="left: calc(60px + 96%); bottom: 45%;">
+        <div class="tooltip">2026: 7.2s</div>
+      </div>
+
+      <div class="timeline-x-label" style="left: calc(60px + 8%);">2000</div>
+      <div class="timeline-x-label" style="left: calc(60px + 40%);">2015</div>
+      <div class="timeline-x-label" style="left: calc(60px + 72%);">2024</div>
+      <div class="timeline-x-label" style="left: calc(60px + 96%);">2026</div>
+    </div>
+    <div style="margin-top: 32px; font-size: 13px; color: var(--text-muted);">
+      Gen Z (18&ndash;24) averages just 5.9 seconds. &mdash; Pew Research Center, January 2026
+    </div>
+  </div>
+
+  <h3>The Neuroscience of Fragmented Attention</h3>
+  <p>A 2025 study published in <em>Scientific Reports</em> (Nature) used functional near-infrared spectroscopy (fNIRS) to measure brain activity in college students before and after social media use. The findings were specific:</p>
+  <ul style="color: var(--text-secondary); margin: 12px 0 16px 20px; font-size: 16px; line-height: 1.7;">
+    <li><strong>Reduced accuracy</strong> in executive function tasks (n-back, Go/No-Go paradigms)</li>
+    <li><strong>Increased medial prefrontal cortex (mPFC) activation</strong> &mdash; suggesting the brain was working harder just to maintain basic performance</li>
+    <li><strong>Decreased dlPFC and vlPFC activation</strong> &mdash; impaired working memory and inhibition</li>
+  </ul>
+
+  <h3>Context Switching Destroys Prospective Memory</h3>
+  <p>Barton et al. (2025) found that the rapid context-switching inherent in short-form video consumption directly damages <strong>prospective memory</strong> &mdash; your ability to remember to do things in the future. Participants exposed to unlimited context-switching conditions showed "significantly deteriorated" prospective memory performance. The pace of switching, not just the content, impairs cognition.</p>
+
+  <h3>Short-Form Video Reduces Analytic Thinking</h3>
+  <p>Jiang and Ma (2024) demonstrated that even <strong>brief exposure</strong> to TikTok content reduces analytic thinking, promoting intuitive, low-effort cognitive processing. The brain shifts from System 2 (deliberate, analytical) to System 1 (fast, reactive) &mdash; and it stays there even after you close the app.</p>
+
+  <div class="callout warn">
+    <div class="callout-title">Digital amnesia</div>
+    <p>The constant flow of information doesn't allow deep encoding into long-term memory. The brain is forced to repress the rules and objectives of the last task and reload the new one &mdash; a process that is not only resource-consuming but leaves a "cognitive residue" from the former task that distorts the current one. This is why you can scroll for an hour and remember almost nothing specific afterward.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 6: DEEP READING ===== -->
+<div class="section" id="deep-reading">
+  <div class="section-number">Mechanism 06</div>
+  <h2>The Death of Deep Reading</h2>
+  <p>Maryanne Wolf, neuroscientist at UCLA and author of <em>Reader, Come Home</em>, has spent decades studying what happens in the brain during reading. Her central finding is both elegant and troubling: <strong>reading is not a natural human ability</strong>. Unlike speech, which unfolds from genetic blueprints, each human brain must construct its own reading circuit from older cognitive structures.</p>
+  <p>This circuit, once built, enables what Wolf calls <strong>deep reading</strong> &mdash; the state where a reader connects text to background knowledge, employs inferential and analogical thinking, takes the perspective of the author, and arrives at moments of genuine insight. Deep reading is where empathy, critical thinking, and understanding live in the brain.</p>
+
+  <div class="callout insight">
+    <div class="callout-title">Wolf's central warning</div>
+    <p>"The digital age is effectively reshaping the reading circuits in our brains." When the brain adapts to processing information in rapid, shallow bursts, the contemplative dimension &mdash; the capacity to pause, reflect, and form insight &mdash; atrophies. Not because you forgot how to read, but because the neural circuit that enables deep reading is being overwritten by one optimized for scanning and skimming.</p>
+  </div>
+
+  <p>Wolf describes this as a "hinge moment" in human cognitive history. If the deep reading circuit atrophies across a generation, we lose the neurological substrate for empathy, perspective-taking, and resistance to demagoguery. Her proposed solution: <strong>biliteracy</strong> &mdash; build the deep reading circuit through physical books first, then introduce digital media. The order matters because neural circuits, once established, are more resilient.</p>
+</div>
+
+<!-- ===== SECTION 7: DMN ===== -->
+<div class="section" id="dmn">
+  <div class="section-number">Mechanism 07</div>
+  <h2>Default Mode Network &mdash; What You Lose When You Never Do Nothing</h2>
+  <p>The Default Mode Network (DMN) is a large-scale brain network &mdash; medial prefrontal cortex, posterior cingulate cortex, precuneus, angular gyrus &mdash; that activates when you are <strong>not focused on the external world</strong>. It's the brain at wakeful rest: daydreaming, self-reflection, remembering the past, planning the future.</p>
+  <p>The DMN is not idle time. It is where the brain does its most important integrative work: constructing a coherent sense of self, consolidating memories, generating creative connections, and building the internal narrative that makes you <em>you</em>.</p>
+  <p>Short-form content consumption fills every moment of potential DMN activation. Waiting in line? Scroll. Sitting on the train? Scroll. Lying in bed before sleep? Scroll. The brain never enters the rest state that allows this network to function.</p>
+
+  <h3>DMN and Reading Comprehension</h3>
+  <p>Research published in <em>eLife</em> revealed a paradox: the DMN is active during both mind-wandering <em>and</em> deep reading comprehension. In focused readers with good comprehension, the primary visual cortex showed strong functional coupling to DMN regions that support reading. In those who mind-wandered, this coupling weakened. The DMN, properly engaged, is part of the deep reading circuit. Disrupted, it becomes the mechanism of distraction.</p>
+
+  <h3>The Consciousness Connection</h3>
+  <p>The DMN has emerged as a central focus in the neuroscience of consciousness. Research shows that its capacity to act as a "global workspace" for integrating information is compromised when it cannot activate properly. This is the same network disrupted in disorders of consciousness and under anesthesia. Chronic scrolling doesn't put you under &mdash; but it may be reducing the richness of your conscious experience.</p>
+</div>
+
+<!-- ===== SECTION 8: COMPARISON ===== -->
+<div class="section" id="comparison">
+  <div class="section-number">Mechanism 08</div>
+  <h2>How It Compares to Other Addictions</h2>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Substance Addiction</th>
+        <th>Short-Form Content</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="feature-name">Reward circuit activated</td>
+        <td>VTA &rarr; nucleus accumbens &rarr; PFC</td>
+        <td>Same pathway (VTA &rarr; NAc &rarr; PFC)</td>
+      </tr>
+      <tr>
+        <td class="feature-name">D2 receptor reduction</td>
+        <td>~20-22% (PET confirmed)</td>
+        <td>~20% (PET confirmed, Kim 2011)</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Tolerance</td>
+        <td>Need higher dose for same effect</td>
+        <td>Need more novel/extreme content</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Withdrawal</td>
+        <td>Physical + psychological</td>
+        <td>Psychological (anxiety, restlessness, irritability)</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Prefrontal impairment</td>
+        <td>Documented across substances</td>
+        <td>Documented (fMRI, fNIRS, VBM)</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Habit shift (ventral&rarr;dorsal)</td>
+        <td>Well-established</td>
+        <td>Emerging evidence</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Reinforcement schedule</td>
+        <td>Variable ratio (gambling) / fixed (drugs)</td>
+        <td>Variable ratio (by design)</td>
+      </tr>
+      <tr>
+        <td class="feature-name">Gray matter reduction</td>
+        <td>ACC, OFC, PFC</td>
+        <td>ACC, OFC, mFG (same regions)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The neurological parallel is not metaphorical. Neuroimaging confirms that the same brain circuits, same neurotransmitter systems, and same structural changes observed in substance addiction are present in heavy digital media consumption. The key difference: substance addiction is recognized by psychiatric frameworks. Behavioral digital addiction is not &mdash; yet.</p>
+
+  <div class="callout">
+    <div class="callout-title">Why "digital detoxes" don't work</div>
+    <p>During abstinence, D2 receptor density begins recovering. But the underlying reinforcement circuits &mdash; cue-reactivity patterns, automated checking behaviors, weakened prefrontal control &mdash; remain intact. When the user re-engages, the original pattern reactivates rapidly because the circuit was <strong>preserved, not dismantled</strong>. The fix requires restructuring the neural architecture, not just removing the stimulus.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 9: ANHEDONIA (HART) ===== -->
+<div class="section" id="anhedonia">
+  <div class="section-number">Mechanism 09</div>
+  <h2>Thrilled to Death &mdash; The Anhedonia Epidemic</h2>
+
+  <div class="book-card">
+    <div class="book-icon" style="background: rgba(227,73,72,0.1); color: var(--cat-8);">&#9889;</div>
+    <div class="book-meta">
+      <div class="book-title">Thrilled to Death: How the Endless Pursuit of Pleasure Is Leaving Us Numb</div>
+      <div class="book-author">Dr. Archibald D. Hart &mdash; Clinical psychologist, behavioral psychology expert</div>
+      <div class="book-thesis">The excessive pursuit of pleasure paradoxically destroys the brain's ability to experience pleasure. We are being thrilled to death &mdash; to the death of our ability to feel genuine joy.</div>
+    </div>
+  </div>
+
+  <p>Hart identified the central paradox years before the short-form video era made it universal: <strong>anhedonia</strong> &mdash; the inability to experience pleasure &mdash; is not caused by too little stimulation. It is caused by too much.</p>
+  <p>Previously, anhedonia was linked only to severe psychiatric disorders: major depression, schizophrenia, chronic pain states. Hart showed that a subtler, more insidious form was spreading through otherwise healthy populations. Not the clinical inability to feel anything &mdash; but a steady, creeping decline in the ability to find joy in small events and simple experiences, while being driven toward ever-increasing levels of stimulation just to feel <em>something</em>.</p>
+
+  <h3>Hart's Threshold Model</h3>
+  <p>Hart illustrated the mechanism with a simple but devastating diagram: dopamine flooding from overstimulation <strong>raises the threshold barrier</strong> that enjoyment must cross to reach the brain's pleasure center. Small pleasures &mdash; a sunset, a conversation, a meal &mdash; no longer clear the bar. Only extreme stimulation registers.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">The Rising Pleasure Threshold</div>
+    <div class="chart-subtitle">Hart's model: overstimulation raises the bar that everyday experiences must clear to register as pleasurable</div>
+    <div class="threshold-diagram">
+      <div class="threshold-row">
+        <span class="threshold-label">Healthy brain</span>
+        <div class="threshold-track">
+          <div class="threshold-fill" style="width: 75%; background: linear-gradient(90deg, var(--cat-3), rgba(27,175,122,0.3));"></div>
+          <div class="threshold-line" style="left: 30%;">
+            <span class="threshold-line-label">Threshold</span>
+          </div>
+        </div>
+      </div>
+      <div class="threshold-row">
+        <span class="threshold-label">Moderate use</span>
+        <div class="threshold-track">
+          <div class="threshold-fill" style="width: 75%; background: linear-gradient(90deg, var(--cat-4), rgba(237,161,0,0.3));"></div>
+          <div class="threshold-line" style="left: 55%;">
+            <span class="threshold-line-label">Threshold &uarr;</span>
+          </div>
+        </div>
+      </div>
+      <div class="threshold-row">
+        <span class="threshold-label">Heavy use</span>
+        <div class="threshold-track">
+          <div class="threshold-fill" style="width: 75%; background: linear-gradient(90deg, var(--cat-8), rgba(227,73,72,0.3));"></div>
+          <div class="threshold-line" style="left: 80%;">
+            <span class="threshold-line-label">Threshold &uarr;&uarr;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">The gradient represents the range of everyday pleasures. As the threshold rises, fewer experiences clear it. At the extreme, almost nothing registers.</div>
+  </div>
+
+  <p>This is the neurochemical reality behind the D2 receptor downregulation measured in PET scans. Hart gave it its human face: the person who can binge an entire season and feel nothing, who scrolls for hours and can't remember why they started, who sits in front of a beautiful landscape and reaches for their phone because the landscape isn't stimulating enough.</p>
+
+  <h3>"Digital Anhedonia" &mdash; A New Clinical Concept</h3>
+  <p>In 2025, a research editorial in <em>Cureus</em> (Lakhan et al.) formally proposed the term <strong>"digital anhedonia"</strong> &mdash; the diminished ability to find pleasure in real-world experiences after prolonged digital saturation. The authors argued it may be the <strong>first affective disorder of the attention economy</strong>, born not from intrinsic psychopathology but from environmental neuroengineering.</p>
+
+  <div class="callout warn">
+    <div class="callout-title">The misdiagnosis problem</div>
+    <p>Clinicians increasingly encounter teens and young adults reporting irritability, poor concentration, disrupted sleep, and social withdrawal. These symptoms are typically interpreted as anxiety, ADHD, or subclinical depression. But a unifying feature is often overlooked: <strong>digital overstimulation and its downstream neurocognitive impact</strong>. Affective flattening, decision fatigue, and avoidance of effortful tasks may result not from inherent pathology but from mismatched neural expectations set by digital feedback loops.</p>
+  </div>
+
+  <p>Hart was writing in 2007, before TikTok existed. The fact that clinical neuroscience is now confirming and naming exactly the phenomenon he described &mdash; and finding it in <em>healthy</em> populations, not just clinical ones &mdash; is a striking validation of his core thesis.</p>
+</div>
+
+<!-- ===== SECTION 10: LEMBKE ===== -->
+<div class="section" id="balance">
+  <div class="section-number">Mechanism 10</div>
+  <h2>The Pleasure-Pain Seesaw</h2>
+
+  <div class="book-card">
+    <div class="book-icon" style="background: rgba(42,120,214,0.1); color: var(--cat-1);">&#9878;</div>
+    <div class="book-meta">
+      <div class="book-title">Dopamine Nation: Finding Balance in the Age of Indulgence</div>
+      <div class="book-author">Dr. Anna Lembke &mdash; Medical Director of Addiction Medicine, Stanford University</div>
+      <div class="book-thesis">The same brain regions that process pleasure also process pain, and they work like a balance scale. Chase enough highs, and your resting state quietly becomes a low.</div>
+    </div>
+  </div>
+
+  <p>Anna Lembke, who runs Stanford's Addiction Medicine Dual Diagnosis Clinic, observed the same mechanism Hart described &mdash; but framed it through an elegant neuroscience principle: <strong>opponent-process theory</strong>.</p>
+  <p>One of the most important findings in neuroscience in the last 75 years is that the same brain areas that process pleasure also process pain, and they operate like a balance scale. Every pleasurable experience tilts the scale toward pleasure, but the brain actively compensates by pushing it back toward pain to restore equilibrium. This is homeostasis. The brain's response to pleasure is not passive reception &mdash; it's <strong>active opposition</strong>.</p>
+
+  <div style="margin: 32px 0;">
+    <div class="seesaw">
+      <div class="seesaw-side pleasure">
+        <div style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Pleasure</div>
+        <div style="font-size: 12px;">Dopamine spike from scroll</div>
+      </div>
+      <div class="seesaw-fulcrum">&#9650;</div>
+      <div class="seesaw-side pain">
+        <div style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Pain</div>
+        <div style="font-size: 12px;">Compensatory dip below baseline</div>
+      </div>
+    </div>
+    <div class="seesaw-bar"></div>
+    <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 8px;">Every dopamine spike is followed by an equal and opposite dip. Chronic overstimulation tilts the resting point toward pain.</div>
+  </div>
+
+  <p>Here is the devastating implication: every dopamine spike is followed by an equal and opposite dip below baseline. That dip is the moment of restlessness, boredom, or anxiety you feel when you put your phone down. It's the micro-withdrawal that makes you pick it back up. And with chronic overstimulation, the resting point of the balance shifts. Your <strong>baseline mood settles below neutral</strong>.</p>
+
+  <div class="callout insight">
+    <div class="callout-title">Lembke's key insight</div>
+    <p>"The smartphone is the modern-day hypodermic needle, delivering digital dopamine 24/7 for a wired generation." Many people struggling with depression, anxiety, insomnia, and low motivation are actually experiencing the consequences of chronic overstimulation &mdash; the addiction is causing the pain, not relieving it.</p>
+  </div>
+
+  <h3>The Counterintuitive Fix: Seek Discomfort</h3>
+  <p>Lembke's most counterintuitive finding: <strong>deliberate, mild discomfort</strong> &mdash; cold water immersion, intense exercise, fasting &mdash; can help reset the balance. These stressors tip the scale slightly toward pain, and the brain's compensatory rebound pushes back toward pleasure, producing a gentle, natural lift. The seesaw works in your favor when you use it correctly.</p>
+  <p>Her clinical protocol: a <strong>4-week abstinence period</strong> to allow dopamine receptor density to recover. Patients typically feel worse for the first 2 weeks as the brain experiences withdrawal. By week 4, ordinary experiences &mdash; food, conversation, sunlight &mdash; begin to register as pleasurable again. The brain recalibrates.</p>
+</div>
+
+<!-- ===== SECTION 11: CARR ===== -->
+<div class="section" id="shallows">
+  <div class="section-number">Mechanism 11</div>
+  <h2>The Shallows &mdash; Neuroplasticity Working Against You</h2>
+
+  <div class="book-card">
+    <div class="book-icon" style="background: rgba(74,58,167,0.1); color: var(--cat-7);">&#9874;</div>
+    <div class="book-meta">
+      <div class="book-title">The Shallows: What the Internet Is Doing to Our Brains</div>
+      <div class="book-author">Nicholas Carr &mdash; Pulitzer Prize finalist (2011)</div>
+      <div class="book-thesis">Neuroplasticity is a double-edged sword. The brain adapts to whatever you train it on. Train it on shallow, fragmented, hyperlinked content, and it becomes shallow, fragmented, and hyperlinked.</div>
+    </div>
+  </div>
+
+  <p>Carr's argument fills the gap between the dopamine research and the structural brain changes: <strong>neuroplasticity</strong>. The brain is not static. It physically restructures itself based on how you use it. Every hour you spend in one mode of thinking strengthens the neural pathways for that mode and weakens the pathways you aren't using.</p>
+  <p>This is not metaphor. Brain scientists have demonstrated that even <strong>five hours of internet use</strong> can cause the formation of new neural pathways in non-internet users. The brain literally rewires for the medium it's exposed to.</p>
+
+  <h3>What Gets Stronger vs. What Gets Weaker</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Strengthened by digital consumption</th>
+        <th>Weakened by digital consumption</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cursory reading and scanning</td>
+        <td>Deep reading and sustained comprehension</td>
+      </tr>
+      <tr>
+        <td>Hurried, distracted thinking</td>
+        <td>Calm, concentrated, deliberate thinking</td>
+      </tr>
+      <tr>
+        <td>Superficial learning (breadth)</td>
+        <td>Deep learning (depth)</td>
+      </tr>
+      <tr>
+        <td>Impulsive decision-making</td>
+        <td>Deliberate decision-making</td>
+      </tr>
+      <tr>
+        <td>Multitasking</td>
+        <td>Single-tasking and flow states</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Carr identified a critical paradox of neuroplasticity: it provides an escape from genetic determinism, but it also imposes <strong>its own form of determinism</strong>. As particular circuits strengthen through repetition, they transform an activity into a habit. The flexibility of neuroplasticity can end up locking you into rigid behaviors.</p>
+
+  <div class="callout">
+    <div class="callout-title">The hyperlink problem</div>
+    <p>Carr cites studies showing that hyperlinks make text <em>harder</em> to understand, not easier. The cognitive load of deciding whether to click is larger than intuition suggests. People skim hypertext and retain less content. The format that appears to offer more access to knowledge actually reduces comprehension. Even the medium through which we read is reshaping what our brains can do with what we read.</p>
+  </div>
+
+  <p>The key takeaway Carr borrows from media theorist Marshall McLuhan: <strong>the medium is the message</strong>. The technologies we use &mdash; maps, clocks, books, phones &mdash; shape our minds through neuroplasticity. Certain skills strengthen while others atrophy. The internet is not just a delivery mechanism for content. It is an environment that restructures the brain for a particular kind of cognition &mdash; fast, shallow, fragmented &mdash; at the expense of another kind: slow, deep, sustained.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 12: SOURCES ===== -->
+<div class="section" id="sources">
+  <div class="section-number">Sources</div>
+  <h2>Key Studies and Research</h2>
+  <p>The findings above draw from peer-reviewed neuroscience research, systematic reviews, and meta-analyses published in major journals. Selected sources:</p>
+
+  <ul class="source-list">
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/21499141/" target="_blank">Kim et al. (2011) &mdash; Reduced striatal dopamine D2 receptors in people with Internet addiction</a> &mdash; PET imaging study, PubMed</li>
+    <li><a href="https://www.pnas.org/doi/10.1073/pnas.1010654108" target="_blank">Volkow et al. (2011) &mdash; Addiction: Beyond dopamine reward circuitry</a> &mdash; PNAS</li>
+    <li><a href="https://www.nature.com/articles/s41380-021-01315-7" target="_blank">Fineberg et al. (2022) &mdash; Structural gray matter differences in Problematic Usage of the Internet: meta-analysis</a> &mdash; Molecular Psychiatry</li>
+    <li><a href="https://academic.oup.com/psyrad/article/doi/10.1093/psyrad/kkad001/7022348" target="_blank">Montag et al. (2023) &mdash; Neuroimaging the effects of smartphone (over-)use on brain function and structure</a> &mdash; Psychoradiology, Oxford Academic</li>
+    <li><a href="https://www.frontiersin.org/journals/cognition/articles/10.3389/fcogn.2023.1203077/full" target="_blank">Frontiers (2023) &mdash; Impact of digital technology, social media, and AI on cognitive functions</a> &mdash; Frontiers in Cognition</li>
+    <li><a href="https://www.sciencedirect.com/science/article/pii/S0306460323000217" target="_blank">Engineered highs: Reward variability and frequency as prerequisites of behavioural addiction</a> &mdash; ScienceDirect</li>
+    <li><a href="https://www.nature.com/articles/s41598-025-20844-7" target="_blank">fNIRS assessment: decline in executive function following social media use</a> &mdash; Scientific Reports, Nature (2025)</li>
+    <li><a href="https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2025.1542271/full" target="_blank">How short video addiction affects risk decision-making (fNIRS)</a> &mdash; Frontiers in Human Neuroscience (2025)</li>
+    <li><a href="https://www.medrxiv.org/content/10.1101/2025.08.27.25334540v2.full" target="_blank">Impact of Short-Form Video Use on Cognitive and Mental Health: Systematic Review</a> &mdash; medRxiv (2025)</li>
+    <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0022395626002785" target="_blank">Neural, neurotransmitter, and molecular signatures of gray matter alterations in digital addiction</a> &mdash; ScienceDirect (2026)</li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12329480/" target="_blank">Modern Day High: The Neurocognitive Impact of Social Media</a> &mdash; PMC (2025)</li>
+    <li><a href="https://elifesciences.org/articles/74011" target="_blank">Perceptual coupling/decoupling of DMN during mind-wandering and reading</a> &mdash; eLife</li>
+    <li><a href="https://www.maryannewolf.com/reader-come-home" target="_blank">Maryanne Wolf &mdash; Reader, Come Home: The Reading Brain in a Digital World</a></li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4106030/" target="_blank">Imaging addiction: D2 receptors and dopamine signaling</a> &mdash; PMC</li>
+    <li><a href="https://nen.wfglobal.org/highlights/shrinking-human-attention-span-statistics-2026-749199" target="_blank">Human Attention Span Statistics 2026</a> &mdash; World Futures Global, citing Microsoft Research</li>
+    <li><a href="https://www.amazon.com/Thrilled-Death-Endless-Pursuit-Pleasure/dp/0849918529" target="_blank">Archibald D. Hart &mdash; Thrilled to Death: How the Endless Pursuit of Pleasure Is Leaving Us Numb (2007)</a></li>
+    <li><a href="https://www.annalembke.com/dopamine-nation" target="_blank">Anna Lembke &mdash; Dopamine Nation: Finding Balance in the Age of Indulgence (2021)</a> &mdash; Stanford Addiction Medicine</li>
+    <li><a href="https://www.amazon.com/Shallows-What-Internet-Doing-Brains/dp/0393339750" target="_blank">Nicholas Carr &mdash; The Shallows: What the Internet Is Doing to Our Brains (2010)</a> &mdash; Pulitzer Prize finalist</li>
+    <li><a href="https://assets.cureus.com/uploads/editorial/pdf/365590/20250430-83159-xp6kfq.pdf" target="_blank">Lakhan et al. (2025) &mdash; Digital Anhedonia as an emerging clinical concept</a> &mdash; Cureus</li>
+    <li><a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0331769" target="_blank">Merklein et al. (2025) &mdash; Anhedonia in everyday life: well-being in healthy and clinical populations</a> &mdash; PLOS One</li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11220474/" target="_blank">Rethinking Pain and Pleasure &mdash; Review of Dopamine Nation</a> &mdash; PMC/NIH</li>
+    <li><a href="https://www.npr.org/sections/health-shots/2021/08/25/1030930259/in-dopamine-nation-overabundance-keeps-u-s-craving-more" target="_blank">NPR: Anna Lembke explores the link between pleasure and pain</a></li>
+  </ul>
+</div>
+
+</main>
+
+<footer>
+  <p>Compiled August 2026. This briefing synthesizes peer-reviewed neuroscience, neuroimaging meta-analyses, and cognitive science research. It is not medical advice. The science is converging, but many findings are still under active investigation and replication.</p>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const fills = document.querySelectorAll('.bar-fill');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const width = target.getAttribute('data-width');
+        target.style.width = '0%';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            target.style.width = width + '%';
+          });
+        });
+        observer.unobserve(target);
+      }
+    });
+  }, { threshold: 0.3 });
+  fills.forEach(fill => observer.observe(fill));
+});
+</script>
+</body>
+</html>
