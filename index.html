@@ -532,6 +532,105 @@
     margin: 48px 0;
   }
 
+  .protocol-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  @media (max-width: 640px) {
+    .protocol-grid { grid-template-columns: 1fr; }
+  }
+  .protocol-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .protocol-card .proto-num {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .protocol-card .proto-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .protocol-card .proto-detail {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .protocol-card .proto-evidence {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .timeline-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  .timeline-table th {
+    text-align: left;
+    padding: 8px 14px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--baseline);
+    font-weight: 600;
+  }
+  .timeline-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gridline);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .timeline-table tr:last-child td { border-bottom: none; }
+  .phase-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .symptom-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .symptom-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--gridline);
+  }
+  .symptom-list li:last-child { border-bottom: none; }
+  .symptom-marker {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
   .book-card {
     background: var(--surface-1);
     border: 1px solid var(--border);
@@ -721,6 +820,8 @@
     <li><a href="#anhedonia">Thrilled to Death &mdash; The Anhedonia Epidemic</a></li>
     <li><a href="#balance">The Pleasure-Pain Seesaw &mdash; Lembke's Dopamine Nation</a></li>
     <li><a href="#shallows">The Shallows &mdash; Neuroplasticity Working Against You</a></li>
+    <li><a href="#brainfog">Brain Fog and Slow Recall &mdash; What's Actually Happening</a></li>
+    <li><a href="#recovery">The Recovery Protocol &mdash; Practical, Evidence-Based Steps</a></li>
     <li><a href="#sources">Sources and Key Studies</a></li>
   </ol>
 </nav>
@@ -1221,9 +1322,200 @@
   <p>The key takeaway Carr borrows from media theorist Marshall McLuhan: <strong>the medium is the message</strong>. The technologies we use &mdash; maps, clocks, books, phones &mdash; shape our minds through neuroplasticity. Certain skills strengthen while others atrophy. The internet is not just a delivery mechanism for content. It is an environment that restructures the brain for a particular kind of cognition &mdash; fast, shallow, fragmented &mdash; at the expense of another kind: slow, deep, sustained.</p>
 </div>
 
+<!-- ===== SECTION 12: BRAIN FOG ===== -->
+<div class="section" id="brainfog">
+  <div class="section-number">Mechanism 12</div>
+  <h2>Brain Fog and Slow Recall &mdash; What's Actually Happening</h2>
+  <p>You know the word. You've used it a hundred times. It's right there &mdash; but it won't come. Ten minutes later, in the shower, it surfaces effortlessly. This isn't random. It's a specific neurological pattern, and digital overconsumption is making it worse.</p>
+
+  <h3>The Retrieval Problem (Not a Storage Problem)</h3>
+  <p>The critical distinction: <strong>the memory exists</strong>. It is encoded and stored. The problem is <em>retrieval</em> &mdash; the brain's ability to access the memory on demand. This is governed by different neural circuits than storage, and those circuits are precisely the ones degraded by chronic digital consumption.</p>
+  <p>Memory retrieval depends on the <strong>prefrontal cortex</strong> coordinating with the <strong>hippocampus</strong> to reconstruct the distributed pattern of the memory. The PFC sends a retrieval cue; the hippocampus pattern-completes the memory trace; the information surfaces into consciousness. When this pathway is impaired, retrieval slows or fails temporarily &mdash; even though the memory is intact.</p>
+
+  <div class="callout">
+    <div class="callout-title">Why it comes back later</div>
+    <p>The delayed recall you experience &mdash; remembering 10 minutes later, or in the shower &mdash; is the brain completing retrieval through an alternate, slower pathway. When the direct PFC-hippocampal route fails, the brain can still access the memory through associative cues, context reinstatement, or reduced cognitive load (which is why it often happens when you stop trying). The memory was never gone. The highway to it was congested.</p>
+  </div>
+
+  <h3>Why Digital Consumption Causes This</h3>
+  <ul class="symptom-list">
+    <li>
+      <span class="symptom-marker" style="background: var(--cat-8);"></span>
+      <span><strong>Prefrontal cortex degradation.</strong> The PFC orchestrates retrieval. Neuroimaging shows 18% decreased PFC activity from dopamine loops, plus gray matter reduction in the dlPFC, ACC, and mOFC. Less PFC capacity = weaker retrieval cues.</span>
+    </li>
+    <li>
+      <span class="symptom-marker" style="background: var(--cat-2);"></span>
+      <span><strong>Retrieval muscles atrophied.</strong> You've outsourced recall to your phone. Every time you Google instead of trying to remember, you skip a retrieval attempt. Research (2025, <em>Scientific Reports</em>) shows that lower frequency of retrieval directly predicts more retrieval failures. Use it or lose it is literally true for memory pathways.</span>
+    </li>
+    <li>
+      <span class="symptom-marker" style="background: var(--cat-4);"></span>
+      <span><strong>Cognitive residue from context-switching.</strong> Rapid switching between short-form content leaves "cognitive residue" &mdash; fragments of the previous task that interfere with the current one. This noise in the working memory system makes clean retrieval harder.</span>
+    </li>
+    <li>
+      <span class="symptom-marker" style="background: var(--cat-7);"></span>
+      <span><strong>Dopamine-attention coupling disrupted.</strong> Dopamine modulates attention and retrieval. Dysregulated dopamine (from D2 receptor downregulation) manifests as inattention, which presents as poor memory, carelessness, and low focus. It's not that you forgot &mdash; it's that your attention system can't lock onto the retrieval cue long enough to complete the process.</span>
+    </li>
+    <li>
+      <span class="symptom-marker" style="background: var(--cat-5);"></span>
+      <span><strong>Shallow encoding from fragmented attention.</strong> Even when information enters memory, it's encoded shallowly because attention was fragmented during learning. Shallow encoding means fewer retrieval routes. There are fewer paths the brain can use to find the memory when it needs it.</span>
+    </li>
+    <li>
+      <span class="symptom-marker" style="background: var(--cat-1);"></span>
+      <span><strong>GABA/glutamate imbalance.</strong> Proton MRS imaging (2025) found that lower GABA and altered glutamate concentrations in frontal and temporal cortices contribute to slower naming and retrieval interference &mdash; local disruptions in excitation-inhibition balance that impair signal propagation within the circuits you need for recall.</span>
+    </li>
+  </ul>
+
+  <h3>The "Tip of the Tongue" Epidemic</h3>
+  <p>The tip-of-the-tongue (TOT) state &mdash; you <em>know</em> you know it, you can feel the shape of the answer, but you can't produce it &mdash; is a transient retrieval failure involving three brain regions: the <strong>anterior cingulate cortex</strong> (which signals "I know this but can't get it"), the <strong>prefrontal cortex</strong> (which searches and verifies), and the <strong>insula</strong> (which helps access the phonological form).</p>
+  <p>All three of these regions show reduced gray matter or reduced activation in heavy digital consumers. The same brain changes that produce the broader cognitive impacts documented above are directly, mechanistically responsible for the increasing frequency of "I know this word but I can't think of it" moments.</p>
+
+  <div class="callout warn">
+    <div class="callout-title">The error reinforcement trap</div>
+    <p>Research shows that repeated TOT experiences for the same item can become self-reinforcing. The brain develops a maladaptive retrieval pattern where the <em>failure itself</em> becomes part of the memory trace. You don't just fail to recall the word &mdash; you start to "remember" that you usually can't recall it, which makes future retrieval even harder. Breaking this loop requires deliberate retrieval practice.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 13: RECOVERY PROTOCOL ===== -->
+<div class="section" id="recovery">
+  <div class="section-number">Recovery</div>
+  <h2>The Recovery Protocol &mdash; What Actually Works</h2>
+  <p>The same neuroplasticity that created the problem can reverse it. The brain physically restructures based on what you do with it. But recovery requires targeted action on the specific circuits that are degraded &mdash; not just "use your phone less."</p>
+
+  <div class="protocol-grid">
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(42,120,214,0.12); color: var(--cat-1);">1</div>
+      <div class="proto-title">Structured Stimulation Reduction</div>
+      <div class="proto-detail">
+        Limit entertainment screen time to &le;2 hours/day. Not all screen time is equal &mdash; active use (writing, coding, creating) is different from passive consumption (scrolling, watching). Target the passive consumption specifically.<br><br>
+        Protect three windows: <strong>first hour after waking</strong> (no phone), <strong>meals</strong> (screen-free), and <strong>last hour before bed</strong>. These are the highest-leverage changes.
+      </div>
+      <div class="proto-evidence">Evidence: RCT showed significant improvements in stress, depression, and sleep quality within 3 weeks of limiting to &lt;2 hrs/day. PFC function restoration measurable at 4 weeks.</div>
+    </div>
+
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(27,175,122,0.12); color: var(--cat-3);">2</div>
+      <div class="proto-title">Active Retrieval Practice</div>
+      <div class="proto-detail">
+        Stop Googling things you should know. When a name or word won't come, <strong>sit with the discomfort and keep trying</strong> for at least 60 seconds before looking it up. That struggle is the retrieval circuit being exercised.<br><br>
+        The effort of retrieval &mdash; the "desirable difficulty" &mdash; is what strengthens the memory trace. Passive re-exposure (re-reading, re-watching) creates an illusion of competence but doesn't build retrieval strength.
+      </div>
+      <div class="proto-evidence">Evidence: Roediger & Karpicke (2006) found active recall produced 80% retention after one week vs. 34% for passive re-reading. Rated "high utility" by Dunlosky et al. (2013).</div>
+    </div>
+
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(235,104,52,0.12); color: var(--cat-2);">3</div>
+      <div class="proto-title">Exercise (Non-Negotiable)</div>
+      <div class="proto-detail">
+        150+ minutes/week of moderate intensity, or incorporate high-intensity interval training (HIIT). Exercise is the single most reliable way to influence dopamine signaling.<br><br>
+        HIIT specifically <strong>increases D2 receptor levels</strong> &mdash; directly counteracting the receptor downregulation caused by digital overconsumption. This isn't a general wellness suggestion. It's targeted pharmacology through behavior.
+      </div>
+      <div class="proto-evidence">Evidence: NYU research showed 30 days of exercise produced 40% increase in dorsal striatum dopamine release, persisting 7 days after stopping. HIIT increases D2 receptor levels (Frontiers in Public Health).</div>
+    </div>
+
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(74,58,167,0.12); color: var(--cat-7);">4</div>
+      <div class="proto-title">Deliberate Boredom</div>
+      <div class="proto-detail">
+        Build stretches of unstimulated time into every day. No phone, no podcast, no background noise. Walk without earbuds. Wait in line without scrolling. Cook without a screen on.<br><br>
+        This re-activates the <strong>Default Mode Network</strong> &mdash; the brain network responsible for memory consolidation, self-reflection, and creative connection. It also allows the pleasure-pain seesaw to return to baseline.
+      </div>
+      <div class="proto-evidence">Evidence: DMN activation during wakeful rest is associated with memory consolidation and creative problem-solving. Lembke's clinical protocol shows recalibration within 4 weeks of reduced stimulation.</div>
+    </div>
+
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(232,123,164,0.12); color: var(--cat-5);">5</div>
+      <div class="proto-title">Sleep Hygiene</div>
+      <div class="proto-detail">
+        7&ndash;9 hours per night. No screens for 60 minutes before bed. Sleep is when the hippocampus replays and consolidates the day's memories into long-term storage.<br><br>
+        Late-night phone use is specifically correlated with <strong>reduced cognitive scores in working memory, attention, and processing speed</strong>. The screen before bed doesn't just delay sleep &mdash; it degrades the quality of the consolidation that happens during sleep.
+      </div>
+      <div class="proto-evidence">Evidence: Sleep improvements following screen reduction show measurable cognitive benefits within days. Late-night phone use correlated with reduced cognitive scores across multiple domains (2024).</div>
+    </div>
+
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(0,131,0,0.12); color: var(--cat-6);">6</div>
+      <div class="proto-title">Deep Reading (30 min/day)</div>
+      <div class="proto-detail">
+        Read physical books for at least 30 minutes daily, without a phone in the room. This specifically rebuilds the deep reading circuit that Maryanne Wolf documented &mdash; the neural network for sustained attention, inference, and reflective thought.<br><br>
+        Start with whatever you can sustain. If 30 minutes feels impossible, that itself is diagnostic &mdash; it means the circuit has atrophied. Begin with 10 minutes and extend by 5 minutes per week.
+      </div>
+      <div class="proto-evidence">Evidence: Wolf's research shows the deep reading circuit can be rebuilt through practice. Neuroplasticity works in both directions &mdash; the same mechanism that weakened the circuit can strengthen it.</div>
+    </div>
+
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(237,161,0,0.12); color: var(--cat-4);">7</div>
+      <div class="proto-title">Seek Mild Discomfort</div>
+      <div class="proto-detail">
+        Cold showers, fasting, hard exercise. Lembke's research shows that mild, voluntary discomfort engages the pleasure-pain balance <em>in your favor</em>. The brain's compensatory rebound from mild pain produces a gentle, natural dopamine lift &mdash; without the crash.<br><br>
+        This is not masochism. It's using the seesaw mechanism to restore baseline sensitivity instead of depleting it.
+      </div>
+      <div class="proto-evidence">Evidence: Lembke's clinical practice at Stanford. Opponent-process theory predicts that controlled pain exposure produces a pleasure rebound, restoring reward sensitivity.</div>
+    </div>
+
+    <div class="protocol-card">
+      <div class="proto-num" style="background: rgba(227,73,72,0.12); color: var(--cat-8);">8</div>
+      <div class="proto-title">Single-Task Everything</div>
+      <div class="proto-detail">
+        Do one thing at a time. No music while reading. No scrolling while watching. No texting while talking. Every act of sustained, single-pointed attention is a rep for the prefrontal cortex.<br><br>
+        Media multitasking is directly associated with <strong>reduced gray matter in the ACC</strong> (Loh & Kanai, 2014). Single-tasking reverses it. This is the behavioral equivalent of physical therapy for the attention system.
+      </div>
+      <div class="proto-evidence">Evidence: Loh & Kanai (2014) found structural ACC reduction in media multitaskers. Sustained attention practice strengthens the same prefrontal circuits that digital consumption degrades.</div>
+    </div>
+  </div>
+
+  <h3>Recovery Timeline</h3>
+  <p>The brain's plasticity works in your favor here. The same mechanism that caused the damage enables recovery &mdash; but it takes time, and the timeline depends on the depth of the changes.</p>
+
+  <div class="chart-container">
+    <div class="chart-title">Expected Recovery Timeline</div>
+    <div class="chart-subtitle">Based on clinical studies of screen time reduction and cognitive rehabilitation</div>
+    <table class="timeline-table">
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Timeframe</th>
+          <th>What Changes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="phase-badge" style="background: rgba(227,73,72,0.12); color: var(--cat-8);">Withdrawal</span></td>
+          <td>Days 1&ndash;3</td>
+          <td>Cravings, restlessness, irritability. This is real withdrawal &mdash; the pain side of Lembke's seesaw overcompensating. It passes.</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge" style="background: rgba(237,161,0,0.12); color: #96660a;">Stabilization</span></td>
+          <td>Days 4&ndash;7</td>
+          <td>Focus and energy begin stabilizing. Sleep quality improves measurably. Cravings reduce but don't disappear.</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge" style="background: rgba(42,120,214,0.12); color: var(--cat-1);">Cognitive return</span></td>
+          <td>Weeks 2&ndash;3</td>
+          <td>Noticeable improvement in recall speed, sustained attention, and ability to hold a thought. Stress and depressive symptoms reduce (RCT evidence).</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge" style="background: rgba(27,175,122,0.12); color: var(--cat-3);">PFC restoration</span></td>
+          <td>Week 4+</td>
+          <td>Prefrontal cortex function measurably restored at &le;2 hrs/day entertainment screen time. Decision-making and impulse control improve.</td>
+        </tr>
+        <tr>
+          <td><span class="phase-badge" style="background: rgba(0,131,0,0.12); color: var(--cat-6);">Structural recovery</span></td>
+          <td>Months 2&ndash;6+</td>
+          <td>Gray matter volume changes take longer and require sustained behavioral change. Exercise accelerates this. The trajectory is promising but data is still limited.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout insight">
+    <div class="callout-title">The key principle</div>
+    <p>Recovery is not about willpower or discipline. It's about understanding that <strong>your brain physically restructures based on what you do with it</strong>. Every hour of deep reading builds the deep reading circuit. Every retrieval attempt strengthens the retrieval pathway. Every hour of unstimulated rest allows the DMN to consolidate. Every bout of exercise upregulates D2 receptors. The protocol is not a punishment &mdash; it's physical therapy for a brain that has been trained in the wrong direction.</p>
+  </div>
+</div>
+
 <div class="divider"></div>
 
-<!-- ===== SECTION 12: SOURCES ===== -->
+<!-- ===== SECTION 14: SOURCES ===== -->
 <div class="section" id="sources">
   <div class="section-number">Sources</div>
   <h2>Key Studies and Research</h2>
@@ -1252,6 +1544,13 @@
     <li><a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0331769" target="_blank">Merklein et al. (2025) &mdash; Anhedonia in everyday life: well-being in healthy and clinical populations</a> &mdash; PLOS One</li>
     <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11220474/" target="_blank">Rethinking Pain and Pleasure &mdash; Review of Dopamine Nation</a> &mdash; PMC/NIH</li>
     <li><a href="https://www.npr.org/sections/health-shots/2021/08/25/1030930259/in-dopamine-nation-overabundance-keeps-u-s-craving-more" target="_blank">NPR: Anna Lembke explores the link between pleasure and pain</a></li>
+    <li><a href="https://www.nature.com/articles/s41598-025-96497-3" target="_blank">Mnemonic factors associated with tip-of-the-tongue phenomenon (2025)</a> &mdash; Scientific Reports, Nature</li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2373253/" target="_blank">Neural correlates of tip-of-the-tongue states</a> &mdash; PMC</li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11499077/" target="_blank">Understanding Digital Dementia and Cognitive Impact in the Internet Era</a> &mdash; PMC (2024)</li>
+    <li><a href="https://www.psychologytoday.com/us/blog/brain-reboot/202409/how-to-break-free-from-brain-fog-and-digital-overload" target="_blank">How to Break Free From Brain Fog and Digital Overload</a> &mdash; Psychology Today (2024)</li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5447931/" target="_blank">Working Memory in the Prefrontal Cortex</a> &mdash; PMC</li>
+    <li><a href="https://freedom.to/blog/dopamine-fasting-science/" target="_blank">Dopamine Fasting: Science, Myths, and How to Reset (Dr. Cameron Sepah, UCSF)</a></li>
+    <li><a href="https://www.psychologytoday.com/us/blog/play-your-way-sane/202512/screen-time-might-be-shrinking-your-brain" target="_blank">Screen Time Might Be Shrinking Your Brain</a> &mdash; Psychology Today (2025)</li>
   </ul>
 </div>
 
